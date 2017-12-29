@@ -2,30 +2,6 @@
 set nocp
 set noswapfile
 
-"""""""""""""""""""""""""""""""neovim
-"
-""vim-plug
-"call plug#begin()
-"Plug 'godlygeek/tabular'
-"Plug 'mhinz/vim-startify'
-"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle'  }
-"Plug 'jiangmiao/auto-pairs'
-"Plug 'itchyny/lightline.vim'
-"Plug 'morhetz/gruvbox'
-"call plug#end()
-"
-""extra-display
-"set cursorline
-"set noshowmode
-"set laststatus =2
-"
-"colorscheme gruvbox
-"
-""lightline
-"let g:lightline = {'colorscheme': 'gruvbox'}
-"
-"""""""""""""""""""""""""""""""
-
 "display
 set nu
 set wildmenu
@@ -58,7 +34,7 @@ set makeprg =g++\ %\ -o\ %<\ -Wall
 inoremap <C-x> <C-o>:w<CR>
 
 inoremap { {}<ESC>i
-inoremap {<CR> {}<ESC>O
+inoremap {<CR> {<CR>}<ESC>O
 inoremap } <C-r>=ClosePair('}')<CR>
 
 inoremap ( ()<ESC>i
