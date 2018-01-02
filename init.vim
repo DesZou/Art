@@ -1,30 +1,44 @@
-"compatible
-set nocp
+"vim-plug
+call plug#begin()
+Plug 'tpope/vim-sensible'
+Plug 'godlygeek/tabular'
+Plug 'mhinz/vim-startify', { 'on': 'Welcome' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'jiangmiao/auto-pairs'
+Plug 'itchyny/lightline.vim'
+Plug 'morhetz/gruvbox'
+call plug#end()
+
+"swapfile
 set noswapfile
 
 "display
-set nu
+set number
 set wildmenu
 set showcmd
+set noshowmode
+set cursorline
 
 syntax   on
 filetype on
 
-set mouse =a
-set t_Co  =256
+set mouse      =a
+set laststatus =2
 set termguicolors
-colorscheme desert
+colorscheme gruvbox
+
+let g:lightline = {'colorscheme': 'gruvbox'}
 
 "indent
-set ai
+set autoindent
 set smartindent
 set cindent
 
-"tab
-set ts  =4
-set sw  =4
-set sts =4
-set et
+"tabstop
+set tabstop     =4
+set shiftwidth  =4
+set softtabstop =4
+set expandtab
 
 "compile C++
 compiler gcc
@@ -32,40 +46,6 @@ set makeprg =g++\ %\ -o\ %<\ -Wall
 
 "keymaps
 inoremap <C-x> <C-o>:w<CR>
-
-inoremap { {}<ESC>i
-inoremap {<CR> {<CR>}<ESC>O
-inoremap } <C-r>=ClosePair('}')<CR>
-
-inoremap ( ()<ESC>i
-inoremap ) <C-r>=ClosePair(')')<CR>
-
-inoremap [ []<ESC>i
-inoremap ] <C-r>=ClosePair(']')<CR>
-
-inoremap " <C-r>=QuoteDelim('"')<CR>
-inoremap ' <C-r>=QuoteDelim("'")<CR>
-
 nnoremap <Leader> :make<CR>
 nnoremap <M-j> :tabn<CR>
 nnoremap <M-k> :tabp<CR>
-
-func ClosePair(char)
-    if getline('.')[col('.') - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char
-    endif
-endf
-
-func QuoteDelim(char)
-    let line = getline('.')
-    let col = col('.')
-    if line[col - 2] == '\'
-        return a:char
-    elseif line[col - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char.a:char."\<ESC>i"
-    endif
-endf
