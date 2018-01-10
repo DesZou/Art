@@ -1,4 +1,4 @@
-// (set-default-font "Consolas-12")
+// (set-default-font "Consolas-11")
 #include <cstdio>
 #include <climits>
 #include <cstring>
@@ -65,7 +65,7 @@ void rotate(Node *x)
 void splay(Node *x)
 {
   for(Node *y = x->fa, *z;
-      y and z = y->fa; y = x->fa) {
+      y and (z = y->fa); y = x->fa) {
     rotate(x->dir() == y->dir()? y : x);
     rotate(x);
   }
@@ -95,10 +95,10 @@ Node* predecessor(Node *x, int key, Node *res = NULL)
 {
   return (x->val < key?
           (x->ch[1]?
-           predecessor(x->ch[0], key, x) :
+           predecessor(x->ch[1], key, x) :
            x) :
           (x->ch[0]?
-           predecessor(x->ch[1], key, res) :
+           predecessor(x->ch[0], key, res) :
            res));
 }
 
@@ -131,12 +131,12 @@ void insert(Node *x, int key)
   }
 }
 
-void remove(Node *x, int key)
+void remove(Node *x)
 {
   splay(x);
   if(x->ch[0] == NULL) {
     root = x->ch[1];
-    root->fa = NULL;
+    if(root) root->fa = NULL;
   } else {
     x->ch[0]->fa = NULL;
     splay(predecessor(x->ch[0], INT_MAX));
@@ -146,7 +146,41 @@ void remove(Node *x, int key)
   delete x;
 }
 
+void traversal(Node *x) {
+  std::cerr << "(" << x->val << ")" << std::endl;
+  if(x->ch[0]) traversal(x->ch[0]);
+  if(x->ch[1]) traversal(x->ch[1]);
+}
+
 int main(void)
 {
+  int cmd, key;
+
+  while(std::scanf("%d%d", &cmd, &key) != EOF)
+    switch(cmd) {
+    case 1:
+      insert(root, key);
+      break;
+    case 2:
+      remove(find_by_value(root, key));
+      break;
+    case 3:
+      splay(find_by_value(root, key));
+      std::printf("%d\n", root->scale());
+      break;
+    case 4:
+      splay(find_by_rank(root, key));
+      std::printf("%d\n", root->val);
+      break;
+    case 5:
+      std::printf("%d\n", predecessor(root, key)->val);
+      break;
+    case 6:
+      std::printf("%d\n", successor(root, key)->val);
+      break;
+    default:
+      traversal(root);
+    }
+
   return 0;
 }
