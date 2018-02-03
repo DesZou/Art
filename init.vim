@@ -17,9 +17,13 @@ set wildmenu
 set showcmd
 set noshowmode
 set cursorline
+set incsearch
+set lazyredraw
 
 syntax   on
 filetype on
+filetype plugin on
+filetype indent on
 
 set termguicolors
 set mouse      =a
@@ -53,6 +57,12 @@ function Compile()
     elseif &filetype == 'go'
         compiler go
         set makeprg =go\ build\ %
+    elseif &filetype == 'python'
+        compiler pylint
+        set makeprg =python3\ %
+    elseif &filetype == 'haskell'
+        compiler ghc
+        set makeprg =ghc\ %
     else
         set makeprg =echo\ ???\ UNKNOWN\ FILETYPE
     endif
