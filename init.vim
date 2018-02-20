@@ -6,6 +6,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 call plug#end()
 
 "swapfile
