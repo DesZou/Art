@@ -6,6 +6,8 @@
 (package-initialize)
 
 (cua-mode t)
+(column-number-mode t)
+(line-number-mode t)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -18,3 +20,4 @@
 (setq-default c-default-style "k&r")
 (setq-default cursor-type 'bar)
 (setq-default indent-tabs-mode nil)
+(setq-default inhibit-splash-screen t)
