@@ -36,11 +36,6 @@ colorscheme gruvbox
 
 let g:lightline = {'colorscheme': 'gruvbox'}
 
-"indent
-set autoindent
-set smartindent
-set cindent
-
 "tabstop
 set tabstop     =4
 set shiftwidth  =4
