@@ -20,6 +20,7 @@ set noshowmode
 set cursorline
 set incsearch
 set lazyredraw
+set cinkeys +=!<Tab>
 
 syntax   on
 filetype on
