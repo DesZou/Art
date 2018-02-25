@@ -1,7 +1,7 @@
-se nu wmnu sc noswf et ai si cin tgc
+se nocp nu wmnu sc noswf et tgc is
 se ts=4 sw=4 sts=4 mouse=a mp =g++\ %\ -o\ %<\ -Wall
 sy on
-filet on
+filet plugin indent on
 colo desert
 comp gcc
 ino<C-x> <C-o>:w<CR>
