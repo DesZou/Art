@@ -60,6 +60,9 @@ function Compile()
     elseif &filetype == 'haskell'
         compiler ghc
         set makeprg =ghc\ %
+    elseif &filetype == 'pascal'
+        compiler fpc
+        set makeprg =fpc\ %
     else
         set makeprg =echo\ ???\ UNKNOWN\ FILETYPE
     endif
