@@ -1,35 +1,23 @@
-se nocp nu wmnu sc noswf et tgc is
-se ts=4 sw=4 sts=4 mouse=a mp =g++\ %\ -o\ %<\ -Wall
+set nocp noswf sc is nu wmnu et lz tgc
+set ts =4 sw =4 sts =4 mouse =a mp =g++\ %\ -o\ %<\ -Wall
 sy on
 filet plugin indent on
-colo desert
+colo morning
 comp gcc
-ino<C-x> <C-o>:w<CR>
-ino { {}<ESC>i
-ino {<CR> {<CR>}<ESC>O
-ino } <C-r>=ClosePair('}')<CR>
-ino ( ()<ESC>i
-ino ) <C-r>=ClosePair(')')<CR>
-ino [ []<ESC>i
-ino ] <C-r>=ClosePair(']')<CR>
-ino " <C-r>=QuoteDelim('"')<CR>
-ino ' <C-r>=QuoteDelim("'")<CR>
-nno <Leader> :make<CR>
-func ClosePair(char)
+ino <c-x> <c-o>:w<cr>
+ino { {}<esc>i
+ino {<cr> {<cr>}<esc>O
+ino ( ()<esc>i
+ino [ []<esc>i
+ino ' <c-r>=repeat(Jump("'"), 2)<cr><esc>i
+ino " <c-r>=repeat(Jump('"'), 2)<cr><esc>i
+ino ) <c-r>=Jump(')')<cr>
+ino } <c-r>=Jump('}')<cr>
+ino ] <c-r>=Jump(']')<cr>
+function Jump(char)
     if getline('.')[col('.') - 1] == a:char
-        return "\<Right>"
+        return "\<right>"
     else
         return a:char
     endif
-endf
-func QuoteDelim(char)
-    let lin = getline('.')
-    let col = col('.')
-    if lin[col - 2] == '\'
-        return a:char
-    elseif lin[col - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char.a:char."\<ESC>i"
-    endif
-endf
+endfunction
