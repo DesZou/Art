@@ -4,6 +4,7 @@ sy on
 filet plugin indent on
 colo morning
 comp gcc
+nno <leader> :make<cr>
 ino <c-x> <c-o>:w<cr>
 ino { {}<esc>i
 ino {<cr> {<cr>}<esc>O
