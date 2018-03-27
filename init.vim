@@ -1,5 +1,6 @@
 "vim-plug
 call plug#begin()
+Plug 'romainl/flattened'
 Plug 'godlygeek/tabular'
 Plug 'mhinz/vim-startify', { 'on': 'Disabled' }
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -9,8 +10,8 @@ Plug 'morhetz/gruvbox'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 call plug#end()
 
-"swapfile
 set noswapfile
+set nobackup
 
 "display
 set number
@@ -20,12 +21,9 @@ set noshowmode
 set cursorline
 set incsearch
 set lazyredraw
-set cinkeys +=!<Tab>
 
 syntax   on
-filetype on
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
 set termguicolors
 set mouse      =a
@@ -35,7 +33,7 @@ let g:gruvbox_italic            =1
 let g:gruvbox_italicize_strings =1
 colorscheme gruvbox
 
-let g:lightline = {'colorscheme': 'gruvbox'}
+let g:lightline = { 'colorscheme': 'gruvbox' }
 
 "tabstop
 set tabstop     =4
@@ -44,31 +42,20 @@ set softtabstop =4
 set expandtab
 
 "compile
-function Compile()
-    if &filetype == 'cpp'
-        compiler gcc
-        set makeprg =g++\ %\ -o\ %<\ -Wall
-    elseif &filetype == 'c'
-        compiler gcc
-        set makeprg =gcc\ %\ -o\ %<\ -Wall
-    elseif &filetype == 'go'
-        compiler go
-        set makeprg =go\ build\ %
-    elseif &filetype == 'python'
-        compiler pylint
-        set makeprg =python3\ %
-    elseif &filetype == 'haskell'
-        compiler ghc
-        set makeprg =ghc\ %
-    elseif &filetype == 'pascal'
-        compiler fpc
-        set makeprg =fpc\ %
-    else
-        set makeprg =echo\ ???\ UNKNOWN\ FILETYPE
-    endif
-    execute "make"
-endfunction
+autocmd Filetype cpp     compiler gcc    | setlocal makeprg =g++\ %\ -o\ %<\ -Wall
+autocmd Filetype c       compiler gcc    | setlocal makeprg =gcc\ %\ -o\ %<\ -Wall
+autocmd Filetype go      compiler go     | setlocal makeprg =go\ build\ %
+autocmd Filetype python  compiler pylint | setlocal makeprg =pylint\ %
+autocmd Filetype haskell compiler ghc    | setlocal makeprg =ghc\ %
+autocmd Filetype pascal  compiler fpc    | setlocal makeprg =fpc\ %
 
 "keymaps
-inoremap <C-x> <C-o>:w<CR>
-nnoremap <Leader> :call Compile()<CR>
+let mapleader   =" "
+let g:mapleader =" "
+inoremap <c-s> <c-o>:w<cr>
+nnoremap <leader><leader> :
+nnoremap <leader>q :qa<cr>
+nnoremap <leader>Q :q!<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>W :w!<cr>
+nnoremap <leader>m :make<cr>
