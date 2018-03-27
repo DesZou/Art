@@ -53,9 +53,6 @@ autocmd Filetype pascal  compiler fpc    | setlocal makeprg =fpc\ %
 let mapleader   =" "
 let g:mapleader =" "
 inoremap <c-s> <c-o>:w<cr>
-nnoremap <leader><leader> :
-nnoremap <leader>q :qa<cr>
-nnoremap <leader>Q :q!<cr>
-nnoremap <leader>w :w<cr>
-nnoremap <leader>W :w!<cr>
-nnoremap <leader>m :make<cr>
+nnoremap <leader> :
+nnoremap <leader><leader>d :NERDTreeToggle<cr>
+nnoremap <leader><leader>c :make<cr>
