@@ -1,12 +1,12 @@
 "vim-plug
 call plug#begin()
-Plug 'romainl/flattened'
 Plug 'godlygeek/tabular'
-Plug 'mhinz/vim-startify', { 'on': 'Disabled' }
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'mhinz/vim-startify'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
+Plug 'iCyMind/NeoSolarized'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 call plug#end()
 
@@ -31,9 +31,17 @@ set laststatus =2
 set background =light
 let g:gruvbox_italic            =1
 let g:gruvbox_italicize_strings =1
-colorscheme gruvbox
+colorscheme NeoSolarized
 
-let g:lightline = { 'colorscheme': 'gruvbox' }
+let g:lightline = { 'colorscheme': 'solarized' }
+
+function! s:filter_header(lines) abort
+    let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
+    let centered_lines = map(copy(a:lines),
+                \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
+    return centered_lines
+endfunction
+let g:startify_custom_header = s:filter_header(['🌹 NEOVIM'])
 
 "tabstop
 set tabstop     =4
@@ -54,5 +62,5 @@ let mapleader   =" "
 let g:mapleader =" "
 inoremap <c-x> <c-o>:w<cr>
 nnoremap <leader> :
-nnoremap <leader><leader>d :NERDTreeToggle<cr>
+nnoremap <leader><leader>d :NERDTree<cr>
 nnoremap <leader><leader>c :make<cr>
