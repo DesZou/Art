@@ -31,9 +31,12 @@ set laststatus =2
 set background =light
 let g:gruvbox_italic            =1
 let g:gruvbox_italicize_strings =1
-colorscheme NeoSolarized
+let g:neosolarized_bold         =1
+let g:neosolarized_underline    =1
+let g:neosolarized_italic       =1
+colorscheme gruvbox
 
-let g:lightline = { 'colorscheme': 'solarized' }
+let g:lightline = { 'colorscheme': 'gruvbox' }
 
 function! s:filter_header(lines) abort
     let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
