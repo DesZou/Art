@@ -36,7 +36,26 @@ let g:neosolarized_underline    =1
 let g:neosolarized_italic       =1
 colorscheme gruvbox
 
-let g:lightline = { 'colorscheme': 'gruvbox' }
+let g:lightline = {
+            \ 'component': {
+            \   'lineinfo': ' %3l:%-2v',
+            \ },
+            \ 'component_function': {
+            \   'readonly': 'LightlineReadonly',
+            \   'fugitive': 'LightlineFugitive'
+            \ },
+            \ 'colorscheme': 'gruvbox'
+            \ }
+function! LightlineReadonly()
+    return &readonly ? '' : ''
+endfunction
+function! LightlineFugitive()
+    if exists('*fugitive#head')
+        let branch = fugitive#head()
+        return branch !=# '' ? ''.branch : ''
+    endif
+    return ''
+endfunction
 
 function! s:filter_header(lines) abort
     let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
@@ -48,9 +67,10 @@ let g:startify_custom_header = s:filter_header(['🌹 NEOVIM'])
 
 "tabstop
 set tabstop     =4
-set shiftwidth  =4
-set softtabstop =4
+set shiftwidth  =0
+set softtabstop =0
 set expandtab
+autocmd Filetype cpp setlocal cinoptions =(0,W4
 
 "compile
 autocmd Filetype cpp     compiler gcc    | setlocal makeprg =g++\ %\ -o\ %<\ -Wall
@@ -67,3 +87,4 @@ inoremap <c-x> <c-o>:w<cr>
 nnoremap <leader> :
 nnoremap <leader><leader>d :NERDTree<cr>
 nnoremap <leader><leader>c :make<cr>
+nnoremap <leader><leader>g :make -std=c++11<cr>
