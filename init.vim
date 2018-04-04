@@ -31,6 +31,7 @@ set background =light
 " increase origin functions
 set ignorecase
 set smartcase
+set magic
 set incsearch
 
 syntax   on
@@ -71,14 +72,14 @@ function! LightlineFugitive()
 endfunction
 
 " startify
-let g:startify_custom_header = s:filter_header(['🌹 NEOVIM'])
-
 function! s:filter_header(lines) abort
     let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
     let centered_lines = map(copy(a:lines),
                 \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
     return centered_lines
 endfunction
+
+let g:startify_custom_header = s:filter_header(['🌹 NEOVIM'])
 
 " indent
 set tabstop     =4
