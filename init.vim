@@ -2,6 +2,7 @@
 "
 " vim-plug
 call plug#begin()
+Plug 'wlangstroth/vim-racket'
 Plug 'godlygeek/tabular'
 Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
@@ -10,6 +11,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'iCyMind/NeoSolarized'
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 call plug#end()
 
 " do not use extra files
@@ -90,20 +93,25 @@ set cinoptions  =(0,W4
 
 " compiler
 autocmd Filetype cpp     compiler gcc    | setlocal makeprg =g++\ %\ -o\ %<\ -Wall
-autocmd Filetype c       compiler gcc    | setlocal makeprg =gcc\ %\ -o\ %<\ -Wall
+autocmd Filetype c       compiler gcc    | setlocal makeprg =gcc\ %\ -o\ %<\ -Wall\ -lm
 autocmd Filetype go      compiler go     | setlocal makeprg =go\ build\ %
-autocmd Filetype python  compiler pylint | setlocal makeprg =pylint\ %
-autocmd Filetype haskell compiler ghc    | setlocal makeprg =ghc\ %
 autocmd Filetype pascal  compiler fpc    | setlocal makeprg =fpc\ %
+autocmd Filetype haskell compiler ghc    | setlocal makeprg =ghc\ %
+autocmd Filetype tex     let b:tex_flavor ="xelatex" | setlocal makeprg =xelatex\ %
+
+"interpreter
+autocmd Filetype python setlocal makeprg =python3\ %\
+autocmd Filetype racket setlocal makeprg =racket\ %\
 
 " mapleader
-let mapleader   =" "
-let g:mapleader =" "
+let mapleader   =","
+let g:mapleader =","
 
 inoremap <c-x> <c-o>:w<cr>
+inoremap <tab> <c-o>==
 
 " special keys
-nnoremap <leader> :
-nnoremap <leader><leader>d :NERDTree<cr>
-nnoremap <leader><leader>c :make<cr>
-nnoremap <leader><leader>g :make -std=c++11<cr>
+nnoremap <leader>o :NERDTree<cr>
+nnoremap <leader>n :enew<cr>
+nnoremap <leader>m :make<cr>
+nnoremap <leader>r :make<cr>
